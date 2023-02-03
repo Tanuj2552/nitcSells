@@ -58,6 +58,42 @@ const Products = () => {
         price: 2500,
         url: "/"
       },
+      {
+        name: "Cricket Kit",
+        id:6,
+        productPhoto:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlf8IwVVqVyj3UZ1I3Sssy5vVB_wTuvtIXeA&usqp=CAU",
+        sellerId: 1,
+        price: 2500,
+        url: "/"
+      },
+      {
+        name: "Cricket Kit",
+        id:6,
+        productPhoto:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlf8IwVVqVyj3UZ1I3Sssy5vVB_wTuvtIXeA&usqp=CAU",
+        sellerId: 1,
+        price: 2500,
+        url: "/"
+      },
+      {
+        name: "Cricket Kit",
+        id:6,
+        productPhoto:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlf8IwVVqVyj3UZ1I3Sssy5vVB_wTuvtIXeA&usqp=CAU",
+        sellerId: 1,
+        price: 2500,
+        url: "/"
+      },
+      {
+        name: "Cricket Kit",
+        id:6,
+        productPhoto:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlf8IwVVqVyj3UZ1I3Sssy5vVB_wTuvtIXeA&usqp=CAU",
+        sellerId: 1,
+        price: 2500,
+        url: "/"
+      },
 
   ];
   return (
