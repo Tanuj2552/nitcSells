@@ -23,7 +23,7 @@ exports.signup = (req,res) => {
 }
 
 exports.signin = async (req,res) => {
-    const {username, password} = req.body;
+    const {username, password,rem} = req.body;
     let user =  new User(username,"","","",password);
     user.find()
     .then((u) => {
@@ -56,26 +56,12 @@ exports.isSignedIn = expressJwt({
     userProperty: "auth"
 });
 
-// exports.signout = (req,res) => {
-//     res.clearCookie("token");
-//     res.json({
-//         message: "User Signout successfully"
-//     });
-// }
-
 exports.signout = (req,res) => {
-    let sql = 'SELECT * FROM users;';
-    db.execute(sql)
-    .then((l) => {
-        console.log(l[0]);
-        res.send(l[0]);
-    })
-    .catch((err) => {
-        console.log(err);
-        res.send(err);
-    })
+    res.clearCookie("token");
+    res.json({
+        message: "User Signout successfully"
+    });
 }
-
 
 exports.isAuthenticated = (req, res, next) => {
     let checker = req.profile && req.auth && req.profile._id == req.auth._id;

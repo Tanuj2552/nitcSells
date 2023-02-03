@@ -3,8 +3,8 @@
     /*Color mode HSL(hue, saturation, lightness)*/
     --first-color: #00b4d8;
     --second-color: #0076b6;
-    --title-color: rgba(255, 255, 255, 0.9);
-    --text-color: rgba(255, 255, 255, 0.7);
+    --color1: rgba(255, 255, 255, 0.9);
+    --color2: rgba(255, 255, 255, 0.7);
     --body-color: #01001f;
   
     /*========== Font and typography ==========*/
@@ -30,7 +30,7 @@
   
   body {
     font-family: var(--body-font);
-    color: var(--text-color);
+    color: var(--color2);
   }
   
   input,
@@ -68,8 +68,8 @@
   
   .login__form {
     position: relative;
-    background-color: rgba(255, 255, 255, 0.1);
-    border: 2px solid rgba(255, 255, 255, 0.06);
+    background-color: rgba(0,0,0, 0.3);
+    border: 2px solid rgba(0,0,0, 0.06);
     margin-inline: 1.5rem;
     row-gap: 1.25rem;
     backdrop-filter: blur(20px);
@@ -78,7 +78,7 @@
   }
   
   .login__title {
-    color: var(--title-color);
+    color: var(--color1);
     font-size: var(--h2-font-size);
     margin-bottom: 0.5rem;
   }
@@ -98,7 +98,7 @@
   
   .login__label {
     display: block;
-    color: var(--title-color);
+    color: var(--color1);
     font-size: var(--small-font-size);
     font-weight: var(--font-semi-bold);
     margin-bottom: 0.25rem;
@@ -108,16 +108,16 @@
     width: 100%;
     padding: 14px 12px;
     border-radius: 6px;
-    border: 2px solid var(--text-color);
+    border: 2px solid var(--color2);
     background-color: rgba(255, 255, 255, 0.1);
-    color: var(--title-color);
+    color: var(--color1);
     font-size: var(--smaller-font-size);
     font-weight: var(--font-medium);
     transition: border 0.4s;
   }
   
   .login__input::placeholder {
-    color: var(--text-color);
+    color: var(--color2);
   }
   
   .login__input:focus,
@@ -155,7 +155,7 @@
     appearance: none;
     width: 16px;
     height: 16px;
-    border: 2px solid var(--text-color);
+    border: 2px solid var(--color2);
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 0.25rem;
   }
@@ -218,19 +218,17 @@
   /* For medium devices */
   @media screen and (min-width: 576px) {
     .login__form {
-      width: 450px;
+      width: 576px;
+      justify-self: center;
+    }
+  }
+
+  @media screen and (max-width: 576px) {
+    .login__form {
       justify-self: center;
     }
   }
   
-  /* For large devices */
-  @media screen and (min-width: 1064px) {
-  
-    .login__form {
-      justify-self: flex-start;
-      margin-left: 6.5rem;
-    }
-  }
   
   @media screen and (min-width: 1200px) {
     .login__form {
@@ -249,7 +247,7 @@
       margin-bottom: 0.75rem;
     }
     .login__input {
-      border: 2.5px solid var(--text-color);
+      border: 2.5px solid var(--color2);
       padding: 1rem;
       font-size: var(--small-font-size);
     }
