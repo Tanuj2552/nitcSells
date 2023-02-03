@@ -63,7 +63,8 @@ const Product = () => {
     },
   ];
   useEffect(() => {
-    setProduct(products.filter((x) => x.id === id));
+    let p = products.filter((x) => x.id === id);
+    setProduct(p[0]);
   }, []);
   
   return (

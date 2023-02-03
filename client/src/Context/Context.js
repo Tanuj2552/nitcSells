@@ -48,7 +48,7 @@ const ContextProvider = ({ children }) => {
         }
     };
     useEffect(() => {
-        newState();
+        // newState();
     },[]);
 
     return(

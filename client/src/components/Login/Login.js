@@ -10,14 +10,15 @@ const Login = () => {
     const navigate = useNavigate();
 
     const [ cred, setCred ] = useState({
-        email: "",
+        username: "",
         password: "",
         rem: true,
     })
 
-    const onLogin = async () => {
+    const onLogin = async (e) => {
+        e.preventDefault();
         try{
-            const res = await axios.post(`${SERVER_URL}/login`,cred,
+            const res = await axios.post(`${SERVER_URL}/signin`,cred,
             { withCredentials: true });
             if(res.status===200){
                 navigate('/');
@@ -44,7 +45,7 @@ const Login = () => {
                 <div className="login__content">
                     <img src={Img1} alt="login image" className="login__img" />
 
-                        <form className="login__form">
+                        <form className="login__form" method='POST'>
                             <div>
                                 <h1 className="login__title">
                                     <span>Welcome</span> Back!
@@ -57,8 +58,8 @@ const Login = () => {
                             <div>
                                 <div className="login__inputs">
                                     <div>
-                                        <label for="" className="login__label">Email</label>
-                                        <input type="email" name="email" value={cred.email} onChange={handleInput} placeholder="Enter your email address" required className="login__input" />
+                                        <label for="" className="login__label">Username/Email</label>
+                                        <input type="text" name="username" value={cred.username} onChange={handleInput} placeholder="Enter your username or email address" required className="login__input" />
                                     </div>
 
                                     <div>
