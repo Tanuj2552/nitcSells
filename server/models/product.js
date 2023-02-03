@@ -1,11 +1,12 @@
 const db = require('../config/db');
 
 class Product{
-    constructor(productName, productPrice, userId, imageId){
+    constructor(productName, productPrice, userId, imageId, productdescription){
         this.productName = productName,
         this.productPrice = productPrice,
         this.userId = userId,
-        this.imageId = imageId
+        this.imageId = imageId,
+        this.productdescription = productdescription
     }
 
     create(){
@@ -20,13 +21,15 @@ class Product{
                 productName,
                 productPrice,
                 userId,
-                imageId
+                imageId,
+                productDescription
             )
             VALUES(
                 '${this.productName}',
                 '${this.productPrice}',
                 '${this.userId}',
-                '${this.imageId}'
+                '${this.imageId}',
+                '${this.productdescription}'
             );
         `;
 
