@@ -13,6 +13,8 @@ app.use(cors());
 
 //* Routes
 app.use("/auth", require("./routes/authRoutes"));
+app.use("/product", require("./routes/productRoutes"));
+
 
 //* Error Handling
 app.use((err, req, res, next) => {
