@@ -35,7 +35,7 @@ exports.getProduct = (req,res) => {
 }
 
 exports.getAllProducts = (req,res) => {
-    let sql = `SELECT * FROM products;`;
+    let sql = `SELECT * FROM products WHERE productStatus = 0;`;
     db.execute(sql)
     .then((r)=>{
         res.json(r);
