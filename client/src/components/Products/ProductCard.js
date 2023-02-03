@@ -17,7 +17,7 @@ const ProductCard = ({ product }) => {
         <div className="d-flex justify-content-evenly">
           <NavLink
             rel="noreferrer"
-            to={`/products/${product.url}`}
+            to={`/products/${product.id}`}
             className="btn btn-sm btn-dark"
           >
             View More
