@@ -1,7 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import ProductCard from "./ProductCard";
-import "./Product.css";
 
 const Products = () => {
   const products = [

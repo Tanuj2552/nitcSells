@@ -63,10 +63,9 @@ const Product = () => {
     },
   ];
   useEffect(() => {
-    let p = products.filter((x) => x.id === id);
-    setProduct(p[0]);
+    setProduct(products.filter((x) => x.id == id)[0]);
   }, []);
-  
+
   return (
     <>
     {product && <div className="product-container container">
@@ -85,7 +84,6 @@ const Product = () => {
         <div className="col-lg-7">
           <div className="row">
             <h3 className="text-center pt-4 pt-lg-1 pb-1">{product.name}</h3>
-            <p dangerouslySetInnerHTML={{ __html: product.name }}></p>
           </div>
         </div>
       </div>
