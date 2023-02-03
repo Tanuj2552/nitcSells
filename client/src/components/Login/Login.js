@@ -81,12 +81,12 @@ const Login = () => {
                             <div>
                                 <div className="login__buttons">
                                     <button onClick={onLogin} className="login__button">Log In</button>
-                                    <button className="login__button login__button-ghost">Sign Up</button>
+                                    <button type='reset' className="login__button login__button-ghost"><a href="/signup" style={{textDecoration:"none",color:"white"}}>Sign Up</a></button>
                                 </div>
-
                                 <a href="#" className="login__forgot">Forgot Password?</a>
                             </div>
                         </form>
+
                 </div>
             </div>
 
