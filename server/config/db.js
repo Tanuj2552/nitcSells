@@ -9,7 +9,7 @@ const pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
     database: 'nitc_rescue',
-    password: "0403",
+    password: "1691",
 });
 
 //* Here we are exporting this module
