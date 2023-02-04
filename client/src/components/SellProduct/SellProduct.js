@@ -40,18 +40,13 @@ const SellProduct = () => {
 
         try {
             const d = new FormData();
-            d.append("pic", prod.image);
+            d.append("image", prod.image);
             d.append("productname", prod.productname);
             d.append("productprice", prod.productprice);
             d.append("userid", prod.userid);
             d.append("productdescription", prod.productdescription);
             
-            const data = await axios.post(`${SERVER_URL}/product/postproduct`,
-                d,
-                {
-                    headers: { "Content-Type": "application/json" }
-                }
-            );
+            const data = await axios.post(`${SERVER_URL}/product/postproduct`,d);
 
             if (data.status === 422 || !data) {
                 window.alert("Invalid Regsitration");
@@ -90,7 +85,7 @@ const SellProduct = () => {
                             <div className={`input_input border ${prod.image ? 'py-3' : 'py-4'} px-4 align-items-center text-start`} style={prod.image ? {} : { height: "63px" }}>{prod.image ? prod.image.name : ""}</div>
                         </label>
                         <div>
-                            <input type="file" id="image" name="image" style={{ display: "none" }} onChange={handlePhoto} required />
+                            <input type="file" id="file-input" name="image" style={{ display: "none" }} onChange={handlePhoto} required />
                         </div>
                     </div>
 

@@ -33,11 +33,10 @@ const Product = () => {
   const deleteProduct = async () => {
     let res;
     try{
-      res = await axios.delete(`${SERVER_URL}/auth/deleteProduct/${product.productId}`);
-      
+      res = await axios.delete(`${SERVER_URL}/product/deleteproduct/${product.productId}`);
       navigate('/');
     }catch(err){
-
+      showAlert("Something went wrong!","danger");
     }
   }
   
@@ -65,7 +64,7 @@ const Product = () => {
       <div className="row p-5">
         <div className="col-lg-5">
           <img
-            src={product.imageId}
+            src={"https://drive.google.com/uc?expert=view&id="+product.imageId}
             alt={product.productName}
             className="img-fluid rounded"
             style={{ width: "30rem", objectFit: "contain" }}
@@ -82,7 +81,7 @@ const Product = () => {
               <p>Mobile No: {contacts.mobileNo}</p>
               <p>EMail: {contacts.mail}</p>
             </div>}
-            {userId==product.userId && <button className="btn btn-danger" onClick={deleteProduct}>Delete</button>}
+            {userId==product.userId && <button className="btn btn-danger" onClick={deleteProduct} style={{width:"100px"}}>Delete</button>}
           </div>
         </div>
       </div>
