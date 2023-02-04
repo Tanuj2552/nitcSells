@@ -13,9 +13,9 @@ const Products = () => {
   const [products, setProducts] = useState([]);
   const { showAlert } = useContext(alertContext);
   const [srch, setSrch] = useState("");
-  console.log('srch',srch)
-  let prods = [];
-  console.log('prods',prods);
+  const [prods, setProds] = useState([]);
+  
+  
   const getAllProducts = async () => {
     let data;
     try {
@@ -24,13 +24,13 @@ const Products = () => {
       prods = data.data[0];
       console.log("data", data);
       setProducts(data.data[0]);
+      setProds(data.data[0]);
     } catch (err) {
       // showAlert(data.data.err);
     }
   };
 
   const searchExecute = () => {
-    console.log('executing');
     const map = new Map();
     let sim1 = [];
     let sim2 = [];
@@ -43,6 +43,9 @@ const Products = () => {
     }
 
     for (let i = 0; i < prods.length; i++) {
+      if(map.has(sim1[i] + sim2[i])){
+        map.set(sim1[i] + sim2[i] + 0.0001, i);
+      }
       map.set(sim1[i] + sim2[i], i);
     }
 
@@ -54,13 +57,11 @@ const Products = () => {
 
     for (var entry of map1.entries()) {
       final_prods.push(prods[entry[1]]);
-      console.log(prods[entry[1]].title);
     }
 
     for (var i = 0; i < prods.length; i++) {
       prods[i] = final_prods[i];
     }
-    console.log('final_prods',final_prods)
   };
 
   const navigate = useNavigate();
