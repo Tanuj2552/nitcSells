@@ -25,6 +25,7 @@
     "node-browser-history": "^2.4.12",
     "nodemon": "^2.0.20",
     "parser": "^0.1.4",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "string-similarity": "^4.0.4"
   }
 }
