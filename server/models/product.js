@@ -8,7 +8,6 @@ class Product{
         this.imageId = imageId,
         this.productdescription = productdescription
     }
-
     create(){
         let d = new Date();
         let year = d.getFullYear();

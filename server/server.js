@@ -4,12 +4,14 @@ const app = express();
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+const path = require('path');
 
 //* Middleware
 app.use(express.json()); //* parse json bodies in the request object
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cors());
+// app.use('/uploads',express.static(path.resolve('uploads')));
 
 //* Routes
 app.use("/auth", require("./routes/authRoutes"));

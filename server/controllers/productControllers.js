@@ -6,9 +6,27 @@ exports.getProductById = (req, res, next, id) => {
     next();
 }
 
-exports.postProduct = (req,res) => {
-    const {productname, productprice, userid, productdescription, imageid} = req.body;
+const mime = require("mime-types");
+const { Readable } = require("stream");
+
+const fs = require('fs');
+const { google } = require('googleapis');
+
+const GOOGLE_API_FOLDER_ID = '1K5UVYYZS6PrDEJRX6QfVj8d7Ng-tBtY0';
+
+const { InitFileUpload } = require('../file_upload');
+
+const fileUpload = InitFileUpload();
+exports.postProduct = async (req,res) => {
+    let {productname, productprice, userid, productdescription, imageid} = req.body;
+    console.log(req.body)
+    const file = req.file.path;
+    const name = req.file.filename;
+    const mimeType = req.file.mimetype;
+    const key = await fileUpload.uploadFile({ name, file, mimeType });
+    imageid=key;
     let product = new Product(productname, productprice, userid, imageid, productdescription);
+    console.log(product)
     product.create()
     .then((r) => {
         res.json("Product is Added!!!");
