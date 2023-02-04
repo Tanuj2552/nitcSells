@@ -1,0 +1,9 @@
+.sell-container .input_label{
+    font-size: 1.3rem;
+    font-style: italic;
+}
+
+.sell-container .input_input{
+    font-size: 1.2rem;
+    width: 30rem;
+}

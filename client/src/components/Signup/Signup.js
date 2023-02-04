@@ -14,7 +14,7 @@ const Signup = () => {
     const [cred, setCred] = useState({
         username:"",
         mail: "",
-        mobileno: "",
+        mobileNo: "",
         password: "",
         cpassword: ""
     })
@@ -105,7 +105,7 @@ const Signup = () => {
 
                                 <div>
                                     <label for="" className="login__label">Phone:</label>
-                                    <input type="text" name="mobileno" value={cred.mobileno} onChange={handleInput} placeholder="Enter your phone" required className="login__input" />
+                                    <input type="text" name="mobileNo" value={cred.mobileNo} onChange={handleInput} placeholder="Enter your phone" required className="login__input" />
                                 </div>
 
 

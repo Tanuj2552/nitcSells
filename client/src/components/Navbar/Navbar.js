@@ -45,11 +45,8 @@ const Navbar = () => {
             <NavLink className="nav-link" aria-current="page" to="/">
               Home
             </NavLink>
-            <NavLink className="nav-link" aria-current="page" to="/events">
-              Events
-            </NavLink>
-            <NavLink className="nav-link" aria-current="page" to="/about">
-              About
+            <NavLink className="nav-link" aria-current="page" to="/sell-product">
+              Sell
             </NavLink>
           </div>
         </div>
