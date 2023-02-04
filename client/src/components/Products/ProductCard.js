@@ -1,22 +1,23 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import './Products.css';
 
 const ProductCard = ({ product }) => {
   return (
     <div className="product-card card">
       <img
-        src={product.productPhoto}
-        alt={product.name}
+        src={product.imageId}
+        alt={product.productName}
         className="card-img-top"
         style={{ height: "250px" }}
       />
       <div className="card-body text-center">
-        <h5 className="card-title">{product.name}</h5>
-        <p className="card-text text-muted">Price : &#8377; {product.price}</p>
+        <h5 className="card-title">{product.productName}</h5>
+        <p className="card-text text-muted">Price : &#8377; {product.productPrice}</p>
         <div className="d-flex justify-content-evenly">
           <NavLink
             rel="noreferrer"
-            to={`/products/${product.id}`}
+            to={`/products/${product.productId}`}
             className="btn btn-sm btn-dark"
           >
             View More

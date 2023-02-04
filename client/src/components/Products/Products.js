@@ -1,101 +1,29 @@
-import React from "react";
+import axios from "axios";
+import React, { useContext, useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
+import { alertContext } from "../../Context/Alert";
+import { SERVER_URL } from "../../EditableStuff/Config";
 import ProductCard from "./ProductCard";
 
 const Products = () => {
-  const products = [
-    {
-      name: "Cricket Kit",
-      id:1,
-      productPhoto:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlf8IwVVqVyj3UZ1I3Sssy5vVB_wTuvtIXeA&usqp=CAU",
-      sellerId: 1,
-      price: 2500,
-      url: "/"
-    },
-    {
-        name: "Cricket Kit",
-        id:2,
-        productPhoto:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlf8IwVVqVyj3UZ1I3Sssy5vVB_wTuvtIXeA&usqp=CAU",
-        sellerId: 1,
-        price: 2500,
-        url: "/"
-      },
-      {
-        name: "Cricket Kit",
-        id:3,
-        productPhoto:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlf8IwVVqVyj3UZ1I3Sssy5vVB_wTuvtIXeA&usqp=CAU",
-        sellerId: 1,
-        price: 2500,
-        url: "/"
-      },
-      {
-        name: "Cricket Kit",
-        id:4,
-        productPhoto:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlf8IwVVqVyj3UZ1I3Sssy5vVB_wTuvtIXeA&usqp=CAU",
-        sellerId: 1,
-        price: 2500,
-        url: "/"
-      },
-      {
-        name: "Cricket Kit",
-        id:5,
-        productPhoto:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlf8IwVVqVyj3UZ1I3Sssy5vVB_wTuvtIXeA&usqp=CAU",
-        sellerId: 1,
-        price: 2500,
-        url: "/"
-      },
-      {
-        name: "Cricket Kit",
-        id:6,
-        productPhoto:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlf8IwVVqVyj3UZ1I3Sssy5vVB_wTuvtIXeA&usqp=CAU",
-        sellerId: 1,
-        price: 2500,
-        url: "/"
-      },
-      {
-        name: "Cricket Kit",
-        id:6,
-        productPhoto:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlf8IwVVqVyj3UZ1I3Sssy5vVB_wTuvtIXeA&usqp=CAU",
-        sellerId: 1,
-        price: 2500,
-        url: "/"
-      },
-      {
-        name: "Cricket Kit",
-        id:6,
-        productPhoto:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlf8IwVVqVyj3UZ1I3Sssy5vVB_wTuvtIXeA&usqp=CAU",
-        sellerId: 1,
-        price: 2500,
-        url: "/"
-      },
-      {
-        name: "Cricket Kit",
-        id:6,
-        productPhoto:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlf8IwVVqVyj3UZ1I3Sssy5vVB_wTuvtIXeA&usqp=CAU",
-        sellerId: 1,
-        price: 2500,
-        url: "/"
-      },
-      {
-        name: "Cricket Kit",
-        id:6,
-        productPhoto:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlf8IwVVqVyj3UZ1I3Sssy5vVB_wTuvtIXeA&usqp=CAU",
-        sellerId: 1,
-        price: 2500,
-        url: "/"
-      },
+  const [products,setProducts] = useState([]);
+  const {showAlert} = useContext(alertContext);
 
-  ];
+  const getAllProducts = async () => {
+    let data;
+    try{
+      data = await axios.get(`${SERVER_URL}/product/getAllProducts`);
+      console.log('data',data);
+      setProducts(data.data[0]);
+    }catch(err){
+      // showAlert(data.data.err);
+    }
+  }
+
+  useEffect(()=>{
+    getAllProducts();
+  },[])
+
   return (
     <div className="products-container container">
       <Helmet>
