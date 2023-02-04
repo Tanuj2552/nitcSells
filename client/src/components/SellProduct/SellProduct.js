@@ -109,7 +109,7 @@ const SellProduct = () => {
                     <div className='py-3'>
                         <label className='input_label'>Description</label>
                         <div>
-                            <textarea className='input_input border py-3 px-4' type="text" name="productdescription" style={{ outline: "none" }} onChange={handleInput} required> value={prod.productdescription}</textarea>
+                            <textarea className='input_input border py-3 px-4' type="text" name="productdescription" style={{ outline: "none" }} onChange={handleInput} required>{prod.productdescription}</textarea>
                         </div>
                     </div>
                     <div className='py-3'>
