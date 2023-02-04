@@ -35,7 +35,7 @@ class User{
 
     find(){
         let sql = `
-            SELECT * FROM users WHERE username = "${this.username}";
+            SELECT * FROM users WHERE mail = "${this.mail}";
         `;
         return db.execute(sql);
     }

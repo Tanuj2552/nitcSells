@@ -7,44 +7,41 @@ const db = require('../config/db');
 
 exports.signup = (req,res) => {
     const {username, mail, mobileno, password} = req.body;
-    let domain = mail.substring(mail.length - 10);
-    if(domain != "nitc.ac.in"){
-        res.status(202).json({"err" : "Invalid Mail"});
-    }else{
-        console.log(username, mail, mobileno, password);
-        bcrypt.hash(password,10)
-        .then((hash) => {
-            let user = new User(username, mail, mobileno, hash);
-            let sql = `SELECT * FROM users WHERE mail = "${mail}";`;
-            db.execute(sql)
-            .then((resp) => {
-                if(resp[0].length > 0){
-                    res.status(201).json({"err" : "Failed"});
-                }else{
-                    user.create()
-                    .then((r) => {
-                        res.json("Signed Up Done!!!");
-                    }).catch((e) => {
-                        if(e){
-                            res.status(400).json({"err" : "Failed", e});
-                        }
-                    });
-                }
-            }).catch((e) => {
-                if(e){
-                    res.status(400).json({"err" : "Failed", e});
-                }
-            });
+    console.log(username, mail, mobileno, password);
+    bcrypt.hash(password,10)
+    .then((hash) => {
+        let user = new User(username, mail, mobileno, hash);
+        let sql = `SELECT * FROM users WHERE mail = "${mail}";`;
+        db.execute(sql)
+        .then((resp) => {
+            if(resp[0].length > 0){
+                res.status(201).json({"err" : "Failed", e});
+            }else{
+                user.create()
+                .then((r) => {
+                    res.json("Signed Up Done!!!");
+                }).catch((e) => {
+                    if(e){
+                        res.status(400).json({"err" : "Failed", e});
+                    }
+                });
+            }
+        }).catch((e) => {
+            if(e){
+                res.status(400).json({"err" : "Failed", e});
+            }
         });
-    }
-    
+    });
 }
 
 exports.signin = async (req,res) => {
-    const {username, password} = req.body;
-    let user =  new User(username,"","","",password);
+    const {mail, password} = req.body;
+    console.log(mail,password);
+    let user =  new User("",mail,"","");
+    console.log('user',user);
     user.find()
     .then((u) => {
+        console.log('u',u[0])
         if(u[0].length > 0){
             bcrypt.compare(password, u[0][0].password, (error, response) => {
                 console.log(response);
@@ -52,13 +49,13 @@ exports.signin = async (req,res) => {
                     const token = jwt.sign({ _id: u[0][0].userid }, 'shhhhh', { algorithm : 'HS256' });
                     res.cookie("token", token, { expire: new Date() + 9999 });
                     const { userId, userName, mail, mobileNo } = u[0][0];
-                    res.json({ token, user: { userId, userName, mail, mobileNo} });
+                    res.status(200).json({ token, user: { userId, userName, mail, mobileNo} });
                 }else{
-                    res.status(400).json({"err" : "Incorrect Password"});
+                    res.status(201).json({"err" : "Incorrect Password"});
                 }
             })
         }else{
-            res.status(400).json({"err" : "User Does Not Exits" });
+            res.status(202).json({"err" : "User Does Not Exits" });
         }
     })
     .catch((err) => {
