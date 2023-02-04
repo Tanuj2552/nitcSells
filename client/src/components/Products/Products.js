@@ -15,14 +15,11 @@ const Products = () => {
   const [srch, setSrch] = useState("");
   const [prods, setProds] = useState([]);
   
-  
+  console.log('products',products)
   const getAllProducts = async () => {
     let data;
     try {
-      data = await axios.get(`${SERVER_URL}/product/getAllProducts`);
-      console.log(srch);
-      prods = data.data[0];
-      console.log("data", data);
+      data = await axios.get(`${SERVER_URL}/product/getallproducts`);
       setProducts(data.data[0]);
       setProds(data.data[0]);
     } catch (err) {
