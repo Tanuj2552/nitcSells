@@ -1,12 +1,14 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import './Products.css';
+const Img = '../../../../server/uploads/1675547031965.png';
 
 const ProductCard = ({ product }) => {
   return (
     <div className="product-card card">
       <img
-        src={product.imageId}
+        // src={pt+product.imageId+'.png'}
+        src={"https://drive.google.com/uc?expert=view&id="+product.imageId}
         alt={product.productName}
         className="card-img-top"
         style={{ height: "250px" }}

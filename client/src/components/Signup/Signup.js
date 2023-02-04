@@ -94,23 +94,23 @@ const Signup = () => {
                             <div className="login__inputs">
 
                                 <div>
-                                    <label for="" className="login__label">Username</label>
+                                    <label for="" className="login__label">*Username</label>
                                     <input type="text" name="username" value={cred.username} onChange={handleInput} placeholder="Enter your username" required className="login__input" />
                                 </div>
 
                                 <div>
-                                    <label for="" className="login__label">EMail</label>
+                                    <label for="" className="login__label">*EMail</label>
                                     <input type="text" name="mail" value={cred.mail} onChange={handleInput} placeholder="Enter your email" required className="login__input" />
                                 </div>
 
                                 <div>
                                     <label for="" className="login__label">Phone:</label>
-                                    <input type="text" name="mobileNo" value={cred.mobileNo} onChange={handleInput} placeholder="Enter your phone" required className="login__input" />
+                                    <input type="text" name="mobileNo" value={cred.mobileNo} onChange={handleInput} placeholder="Enter your phone" className="login__input" />
                                 </div>
 
 
                                 <div>
-                                    <label for="" className="login__label">Password</label>
+                                    <label for="" className="login__label">*Password</label>
 
                                     <div className="login__box">
                                         <input type="password" name='password' value={cred.password} onChange={handleInput} placeholder="Enter your password" required className="login__input" id="input-pass" />
@@ -118,7 +118,7 @@ const Signup = () => {
                                     </div>
                                 </div>
                                 <div>
-                                    <label for="" className="login__label">Confirm Password</label>
+                                    <label for="" className="login__label">*Confirm Password</label>
 
                                     <div className="login__box">
                                         <input type="password" name='cpassword' value={cred.cpassword} onChange={handleInput} placeholder="Confirm your password" required className="login__input" id="input-pass2" />
