@@ -23,7 +23,7 @@ exports.signup = (req,res) => {
 }
 
 exports.signin = async (req,res) => {
-    const {username, password,rem} = req.body;
+    const {username, password} = req.body;
     let user =  new User(username,"","","",password);
     user.find()
     .then((u) => {

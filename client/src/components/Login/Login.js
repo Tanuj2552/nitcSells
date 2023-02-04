@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Img1 from './img1.jpg';
 import './Login.css';
 import axios from "axios";
 import { SERVER_URL } from '../../EditableStuff/Config';
 import { useNavigate } from 'react-router-dom';
+import { alertContext } from '../../Context/Alert';
 
 const Login = () => {
 
     const navigate = useNavigate();
+    const { showAlert } = useContext(alertContext);
 
     const [ cred, setCred ] = useState({
         username: "",
@@ -18,13 +20,23 @@ const Login = () => {
     const onLogin = async (e) => {
         e.preventDefault();
         try{
-            const res = await axios.post(`${SERVER_URL}/signin`,cred,
-            { withCredentials: true });
-            if(res.status===200){
-                navigate('/');
+            const res = await axios.post(`${SERVER_URL}/auth/signin`,cred,
+            {
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json"
+                }
+            });
+            console.log('response',res);
+            if(res.status===400){
+                showAlert(res.data.err,"danger");
             }
             else{
-                
+                if (typeof window !== "undefined") {
+                    localStorage.setItem("jwt", JSON.stringify(res.token));
+                };
+                navigate('/');
+                showAlert("Logged in successfully!", "success");
             }
         }catch(err){
             console.log(err);
