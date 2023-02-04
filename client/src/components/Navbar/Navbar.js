@@ -25,7 +25,7 @@ const Navbar = () => {
   }
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div className="container-fluid">
+      <div className="container-fluid px-5">
         <a className="navbar-brand" href="#">
           NitCsell
         </a>
@@ -50,23 +50,13 @@ const Navbar = () => {
             </NavLink>
           </div>
         </div>
-        <form className="d-flex">
-          <input
-            className="form-control me-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-          />
-          <button className="btn btn-outline-success" type="submit">
-            Search
-          </button>
-        </form>
+        
 
         {
           username &&
           <>
-            <div clasName="mx-2" style={{ color: "white" }}> Hello {username}</div>
-            <button type="button" onClick={Logout} class="btn btn-outline-success mx-2">
+            <div className="mx-2" style={{ color: "white" }}> Hello {username}</div>
+            <button type="button" onClick={Logout} class="btn btn-outline-light mx-2">
               Logout
             </button>
           </>
