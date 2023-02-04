@@ -11,6 +11,7 @@ import Footer from "../Footer/Footer";
 const Products = () => {
   const [products, setProducts] = useState([]);
   const { showAlert } = useContext(alertContext);
+  const [srch,setSrch] = useState("");
 
   const getAllProducts = async () => {
     let data;
@@ -39,12 +40,13 @@ const Products = () => {
     <>
 
       <Navbar />
-      <div className="products-container container">
+      <div className="py-3 products-container container">
         <Helmet>
           <title>Products - NITC</title>
         </Helmet>
-        <div className="col-md-4 text-center text-md-start">
-          <h2>Projects</h2>
+        <h1 className="py-4 text-center">Products</h1>
+        <div className="pb-5">
+          <input type="search" className="border w-100 px-4 py-3 rounded-pill fs-5" value={srch} onChange={(e)=>setSrch(e.target.value)} placeholder="Search here.." />
         </div>
         <div className="row">
           {products.map((product, i) => {
