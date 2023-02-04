@@ -45,3 +45,16 @@ exports.getAllProducts = (req,res) => {
         }
     });
 }
+
+exports.deleteProduct = (req,res) => {
+    const {productId} = req;
+    let sql = `DELETE FROM products WHERE productId = ${productId};`;
+    db.execute(sql)
+    .then((r)=>{
+        res.status(200).json({"Msg" : "Success", r});
+    }).catch((e) => {
+        if(e){
+            res.status(400).json({"err" : "Failed", e});
+        }
+    });
+}
