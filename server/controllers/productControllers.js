@@ -7,7 +7,7 @@ exports.getProductById = (req, res, next, id) => {
 }
 
 exports.postProduct = (req,res) => {
-    const {productname, productprice, userid, imageid, productdescription} = req.body;
+    const {productname, productprice, userid, productdescription, imageid} = req.body;
     let product = new Product(productname, productprice, userid, imageid, productdescription);
     product.create()
     .then((r) => {

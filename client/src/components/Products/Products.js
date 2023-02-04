@@ -11,9 +11,9 @@ const stringSimilarity = require("string-similarity");
 
 const Products = () => {
   const [products, setProducts] = useState([]);
-  const [prods, setProds] = useState([]);
   const { showAlert } = useContext(alertContext);
   const [srch, setSrch] = useState("");
+  const [prods, setProds] = useState([]);
   
   
   const getAllProducts = async () => {
@@ -21,8 +21,8 @@ const Products = () => {
     try {
       data = await axios.get(`${SERVER_URL}/product/getAllProducts`);
       console.log(srch);
-      
-      console.log("data", data.data[0]);
+      prods = data.data[0];
+      console.log("data", data);
       setProducts(data.data[0]);
       setProds(data.data[0]);
     } catch (err) {
@@ -31,26 +31,22 @@ const Products = () => {
   };
 
   const searchExecute = () => {
-    console.log(prods.length);
-
     const map = new Map();
     let sim1 = [];
     let sim2 = [];
     for (let i = 0; i < prods.length; i++) {
-      sim1.push(stringSimilarity.compareTwoStrings(srch, prods[i].productDescription));
+      sim1.push(stringSimilarity.compareTwoStrings(srch, prods[i].description));
     }
 
     for (let i = 0; i < prods.length; i++) {
-      sim2.push(stringSimilarity.compareTwoStrings(srch, prods[i].productName));
+      sim2.push(stringSimilarity.compareTwoStrings(srch, prods[i].title));
     }
 
     for (let i = 0; i < prods.length; i++) {
       if(map.has(sim1[i] + sim2[i])){
-        map.set(sim1[i] + sim2[i] - 0.0001, i);
+        map.set(sim1[i] + sim2[i] + 0.0001, i);
       }
-      else{
-        map.set(sim1[i] + sim2[i], i);
-      }
+      map.set(sim1[i] + sim2[i], i);
     }
 
     let map1 = new Map([...map.entries()].sort());
@@ -61,14 +57,11 @@ const Products = () => {
 
     for (var entry of map1.entries()) {
       final_prods.push(prods[entry[1]]);
-      console.log(prods[entry[1]].productName);
-    }
-    console.log(final_prods.length);
-    
-    for(var i=0;i<prods.length; i++){
-      products[i] = final_prods[i];
     }
 
+    for (var i = 0; i < prods.length; i++) {
+      prods[i] = final_prods[i];
+    }
   };
 
   const navigate = useNavigate();
