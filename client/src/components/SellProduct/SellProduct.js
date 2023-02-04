@@ -54,6 +54,7 @@ const SellProduct = () => {
             }
             else {
                 console.log("Regsitration Successfull");
+                navigate('/');
             }
         } catch (err) {
             console.log('err', err);
