@@ -10,10 +10,11 @@ const SellProduct = () => {
     const [prod, setProd] = useState({
         productname: "",
         productprice: "",
-        userid:"",
-        imageid: "",
+        image: "",
+        userid: "",
         productdescription: ""
     });
+
 
     const navigate = useNavigate();
     useEffect(() => {
@@ -21,58 +22,47 @@ const SellProduct = () => {
         if (!u) {
             navigate('/login')
         }
-        setProd({...prod,['userid']:u});
+        setProd({ ...prod, ['userid']: u });
     }, [])
-    console.log('prod',prod);
+    console.log('prod', prod);
     const handleInput = (e) => {
-        setProd({...prod, [e.target.name]:e.target.value});
+        setProd({ ...prod, [e.target.name]: e.target.value });
     }
 
     const handlePhoto = (e) => {
-        setProd({...prod, [e.target.name]: e.target.files[0]});
+        setProd({ ...prod, [e.target.name]: e.target.files[0] });
+        console.log('image', e.target.files[0])
     }
 
     const AddProduct = async (e) => {
         e.preventDefault();
-            // const data = new FormData();
-            // const photoname = Date.now() + prod.photo.name;
-            // data.append("name",photoname);
-            // data.append("photo",prod.photo);
-            // console.log('formdata',data);
-            // var imgurl;
 
-            // try{
-            //     const img = await axios.post(`${SERVER_URL}/imgupload`,data);
-            //     console.log('img',img);
-            //     imgurl = img.data;
-            //     prod.photo=imgurl
-            // }catch(err){
-            //     console.log('photoerr',err);
-            // }
-            // console.log('imgurl',imgurl);
+
+        try {
+            const d = new FormData();
+            d.append("pic", prod.image);
+            d.append("productname", prod.productname);
+            d.append("productprice", prod.productprice);
+            d.append("userid", prod.userid);
+            d.append("productdescription", prod.productdescription);
             
-            try{
-                
-                const data = await axios.post(`${SERVER_URL}/product/postproduct`,
-                    prod,
-                    {
-                        headers:{"Content-Type" : "application/json"}
-                    }
-                );
-                
-                if(data.status === 422 || !data){
-                    window.alert("Invalid Regsitration");
-                    console.log("Invalid Regsitration");
+            const data = await axios.post(`${SERVER_URL}/product/postproduct`,
+                d,
+                {
+                    headers: { "Content-Type": "application/json" }
                 }
-                else{
-                    console.log('data');
-                    console.log(data);
-                    console.log("Regsitration Successfull");
-                    navigate('/team');
-                }
-            }catch(err){
-                console.log('err',err);
+            );
+
+            if (data.status === 422 || !data) {
+                window.alert("Invalid Regsitration");
+                console.log("Invalid Regsitration");
             }
+            else {
+                console.log("Regsitration Successfull");
+            }
+        } catch (err) {
+            console.log('err', err);
+        }
     }
 
     return (
@@ -84,7 +74,7 @@ const SellProduct = () => {
                     <div className='py-3'>
                         <label className='input_label'>Name</label>
                         <div>
-                            <input className='input_input border py-3 px-4' type="text" name="productname" value={prod.productname} onChange={handleInput} required/>
+                            <input className='input_input border py-3 px-4' type="text" name="productname" value={prod.productname} onChange={handleInput} required />
                         </div>
                     </div>
                     <div className='py-3'>
@@ -95,21 +85,19 @@ const SellProduct = () => {
                     </div>
 
                     <div className='py-3'>
-                        <label for="file-input" className='input_label'>
-                            Product Images
-                            <div className='input_input border p-4 align-items-center text-start font-weight-normal' style={{ height: "68px" }}></div>
+                        <label for="file-input" className='input_label2'>
+                            <span className='input_label'>Product Images</span>
+                            <div className={`input_input border ${prod.image ? 'py-3' : 'py-4'} px-4 align-items-center text-start`} style={prod.image ? {} : { height: "63px" }}>{prod.image ? prod.image.name : ""}</div>
                         </label>
                         <div>
-                            <input type="file" id="file-input" name="imageid" style={{ display: "none" }}  onChange={handlePhoto} required/>
+                            <input type="file" id="image" name="image" style={{ display: "none" }} onChange={handlePhoto} required />
                         </div>
                     </div>
-
-
 
                     <div className='py-3'>
                         <label className='input_label'>Description</label>
                         <div>
-                            <textarea className='input_input border py-3 px-4' type="text" name="productdescription" style={{ outline: "none" }} onChange={handleInput} required> value={prod.productdescription}</textarea>
+                            <textarea className='input_input border py-3 px-4' type="text" name="productdescription" style={{ outline: "none" }} onChange={handleInput} required>{prod.productdescription}</textarea>
                         </div>
                     </div>
                     <div className='py-3'>

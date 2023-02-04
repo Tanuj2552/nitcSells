@@ -13,7 +13,9 @@ const Products = () => {
   const [products, setProducts] = useState([]);
   const { showAlert } = useContext(alertContext);
   const [srch, setSrch] = useState("");
+  console.log('srch',srch)
   let prods = [];
+  console.log('prods',prods);
   const getAllProducts = async () => {
     let data;
     try {
@@ -28,6 +30,7 @@ const Products = () => {
   };
 
   const searchExecute = () => {
+    console.log('executing');
     const map = new Map();
     let sim1 = [];
     let sim2 = [];
@@ -57,6 +60,7 @@ const Products = () => {
     for (var i = 0; i < prods.length; i++) {
       prods[i] = final_prods[i];
     }
+    console.log('final_prods',final_prods)
   };
 
   const navigate = useNavigate();
