@@ -14,7 +14,7 @@ app.use(cors());
 //* Routes
 app.use("/auth", require("./routes/authRoutes"));
 app.use("/product", require("./routes/productRoutes"));
-
+app.use("/user", require("./routes/userRoutes"));
 
 //* Error Handling
 app.use((err, req, res, next) => {

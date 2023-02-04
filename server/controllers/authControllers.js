@@ -46,7 +46,7 @@ exports.signin = async (req,res) => {
                     const token = jwt.sign({ _id: u[0][0].userid }, 'shhhhh', { algorithm : 'HS256' });
                     res.cookie("token", token, { expire: new Date() + 9999 });
                     const { userId, userName, mail, mobileNo } = u[0][0];
-                    res.json({ token, user: { userId, userName, email, mobileNo} });
+                    res.json({ token, user: { userId, userName, mail, mobileNo} });
                 }else{
                     res.status(400).json({"err" : "Incorrect Password"});
                 }
