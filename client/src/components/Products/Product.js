@@ -20,7 +20,7 @@ const Product = () => {
       console.log('data',data.data[0][0]);
       const c = data.data[0][0].userId
       setProduct(data.data[0][0]);
-      const data2 = await axios.get(`${SERVER_URL}/auth/user/${c}`);
+      const data2 = await axios.get(`${SERVER_URL}/user/getuser/${c}`);
       console.log('data2',data.data[0][0]);
       setContacts(data2.data[0][0]);
     }catch(err){
@@ -64,14 +64,15 @@ const Product = () => {
         <div className="col-lg-7">
           <div className="row">
             <h3 className="text-center pt-4 pt-lg-1 pb-1">{product.productName}</h3>
+            <div></div>
             <p>Price: {product.productPrice}</p>
             <p>Description: {product.productDescription}</p>
             {contacts && 
             <div>
-              <p>Mobile No: {contacts.mobileno}</p>
+              <p>Mobile No: {contacts.mobileNo}</p>
               <p>EMail: {contacts.mail}</p>
             </div>}
-            {userId===product.userId && <button className="btn btn-danger" onClick={deleteProduct}>Delete</button>}
+            {userId==product.userId && <button className="btn btn-danger" onClick={deleteProduct}>Delete</button>}
           </div>
         </div>
       </div>
