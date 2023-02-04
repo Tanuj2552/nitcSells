@@ -6,11 +6,11 @@ const db = require('../config/db');
 
 
 exports.signup = (req,res) => {
-    const {username, mail, mobileno, password} = req.body;
-    console.log(username, mail, mobileno, password);
+    const {username, mail, mobileNo, password} = req.body;
+    console.log(username, mail, mobileNo, password);
     bcrypt.hash(password,10)
     .then((hash) => {
-        let user = new User(username, mail, mobileno, hash);
+        let user = new User(username, mail, mobileNo, hash);
         let sql = `SELECT * FROM users WHERE mail = "${mail}";`;
         db.execute(sql)
         .then((resp) => {
