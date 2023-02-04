@@ -20,4 +20,9 @@ router
     .route("/getallproducts")
     .get(productControllers.getAllProducts);
 
+//* DELETEPRODUCT DELETE Route
+router
+    .route("/deleteproduct/:productId")
+    .delete(productControllers.deleteProduct);
+
 module.exports = router;

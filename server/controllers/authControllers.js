@@ -11,9 +11,21 @@ exports.signup = (req,res) => {
     bcrypt.hash(password,10)
     .then((hash) => {
         let user = new User(username, mail, mobileno, hash);
-        user.create()
-        .then((r) => {
-            res.json("Signed Up Done!!!");
+        let sql = `SELECT * FROM users WHERE mail = "${mail}";`;
+        db.execute(sql)
+        .then((resp) => {
+            if(resp[0].length > 0){
+                res.status(201).json({"err" : "Failed", e});
+            }else{
+                user.create()
+                .then((r) => {
+                    res.json("Signed Up Done!!!");
+                }).catch((e) => {
+                    if(e){
+                        res.status(400).json({"err" : "Failed", e});
+                    }
+                });
+            }
         }).catch((e) => {
             if(e){
                 res.status(400).json({"err" : "Failed", e});
@@ -23,7 +35,7 @@ exports.signup = (req,res) => {
 }
 
 exports.signin = async (req,res) => {
-    const {username, password,rem} = req.body;
+    const {username, password} = req.body;
     let user =  new User(username,"","","",password);
     user.find()
     .then((u) => {
@@ -33,8 +45,8 @@ exports.signin = async (req,res) => {
                 if(response){
                     const token = jwt.sign({ _id: u[0][0].userid }, 'shhhhh', { algorithm : 'HS256' });
                     res.cookie("token", token, { expire: new Date() + 9999 });
-                    const { userId, userName, email, dob, mobileNo } = u[0][0];
-                    res.json({ token, user: { userId, userName, email, dob, mobileNo} });
+                    const { userId, userName, mail, mobileNo } = u[0][0];
+                    res.json({ token, user: { userId, userName, email, mobileNo} });
                 }else{
                     res.status(400).json({"err" : "Incorrect Password"});
                 }
