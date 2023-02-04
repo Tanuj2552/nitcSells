@@ -4,28 +4,48 @@ import { Helmet } from "react-helmet";
 import axios from "axios";
 import { SERVER_URL } from "../../EditableStuff/Config";
 import { alertContext } from "../../Context/Alert";
+import { useNavigate } from 'react-router-dom';
 
 const Product = () => {
   const params = new useParams();
   const id = params.id;
+  const navigate = useNavigate();
   const {showAlert} = useContext(alertContext);
   const [product, setProduct] = useState(null);
-
+  const [contacts,setContacts] = useState(null);
   const getProduct = async () => {
     let data;
     try{
       data = await axios.get(`${SERVER_URL}/product/getProduct/${id}`);
       console.log('data',data.data[0][0]);
+      const c = data.data[0][0].userId
       setProduct(data.data[0][0]);
+      const data2 = await axios.get(`${SERVER_URL}/auth/user/${c}`);
+      console.log('data2',data.data[0][0]);
+      setContacts(data2.data[0][0]);
     }catch(err){
       showAlert(data.data.err,"danger");
     }
   }
+
+  const deleteProduct = async () => {
+    let res;
+    try{
+      res = await axios.delete(`${SERVER_URL}/auth/deleteProduct/${product.productId}`);
+      
+      navigate('/');
+    }catch(err){
+
+    }
+  }
+  const [userId,setUserId] = useState(null);
   useEffect(() => {
-    // setProduct(products.filter((x) => x.id == id)[0]);
+    const u = localStorage.getItem("userId");
+    if(u){
+      setUserId(u);
+    }
     getProduct();
   }, []);
-
   return (
     <>
     {product && <div className="product-container container">
@@ -46,6 +66,12 @@ const Product = () => {
             <h3 className="text-center pt-4 pt-lg-1 pb-1">{product.productName}</h3>
             <p>Price: {product.productPrice}</p>
             <p>Description: {product.productDescription}</p>
+            {contacts && 
+            <div>
+              <p>Mobile No: {contacts.mobileno}</p>
+              <p>EMail: {contacts.mail}</p>
+            </div>}
+            {userId===product.userId && <button className="btn btn-danger" onClick={deleteProduct}>Delete</button>}
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Img1 from '../Login/img1.jpg';
 import '../Login/Login.css';
 import axios from "axios";
@@ -12,13 +12,23 @@ const Signup = () => {
     const { showAlert } = useContext(alertContext);
 
     const [cred, setCred] = useState({
+        username:"",
         mail: "",
         mobileno: "",
-        username: "",
         password: "",
         cpassword: ""
     })
     console.log('cred',cred);
+    useEffect(() => {
+        const u = localStorage.getItem("username");
+        console.log('u', u)
+
+
+        if (u)  {
+            navigate('/');
+            window.location.reload(true);
+        }
+    }, []);
     const onSignup = async (e) => {
         e.preventDefault();
         try {
@@ -36,7 +46,7 @@ const Signup = () => {
             else {
                 const signinres = await axios.post(`${SERVER_URL}/auth/signin`,
                 {
-                    username:cred.username,
+                    mail:cred.mail,
                     password:cred.password
                 },
                 {
@@ -45,14 +55,18 @@ const Signup = () => {
                         "Content-Type": "application/json"
                     }
                 });
+                console.log('signinres',signinres.data);
                 if (typeof window !== "undefined") {
-                    localStorage.setItem("jwt", JSON.stringify(signinres.token));
+                    localStorage.setItem("jwt", JSON.stringify(signinres.data.token));
+                    localStorage.setItem("userId", JSON.stringify(signinres.data.user.userId));
+                    localStorage.setItem("username", JSON.stringify(signinres.data.user.userName));
+
                 };
                 navigate('/');
                 showAlert("Account created successfully!", "success");
             }
         } catch (err) {
-            showAlert("EMail Already exist!","danger");
+            showAlert("Something went wrong!","danger");
         }
     }
 
