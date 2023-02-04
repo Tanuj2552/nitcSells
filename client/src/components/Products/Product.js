@@ -5,6 +5,8 @@ import axios from "axios";
 import { SERVER_URL } from "../../EditableStuff/Config";
 import { alertContext } from "../../Context/Alert";
 import { useNavigate } from 'react-router-dom';
+import Navbar from '../../components/Navbar/Navbar';
+import Footer from '../../components/Footer/Footer';
 
 const Product = () => {
   const params = new useParams();
@@ -38,6 +40,13 @@ const Product = () => {
 
     }
   }
+  
+  useEffect(() => {
+    const u=localStorage.getItem("username");
+    if(!u){
+      navigate('/login')
+    }
+  }, [])
   const [userId,setUserId] = useState(null);
   useEffect(() => {
     const u = localStorage.getItem("userId");
@@ -48,6 +57,7 @@ const Product = () => {
   }, []);
   return (
     <>
+    <Navbar />
     {product && <div className="product-container container">
       <Helmet>
         <title>Product - NITC</title>
@@ -77,6 +87,7 @@ const Product = () => {
         </div>
       </div>
     </div>}
+    <Footer />
     </>
   );
 };
