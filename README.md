@@ -7,11 +7,17 @@ It has all the Required Features, for such a platform, ready to be hosted.
 ![alt text](https://github.com/Tanuj2552/nitcSells/blob/main/images/flowchart.png?raw=true)
 
 # 1) User Authentication
+![alt text](https://github.com/Tanuj2552/nitcSells/blob/main/images/1.jpeg?raw=true)
 
 # 2) Viewing All the Available Products
+![alt text](https://github.com/Tanuj2552/nitcSells/blob/main/images/2.jpeg?raw=true)
 
 # 3) Search Bar to Navigate
+![alt text](https://github.com/Tanuj2552/nitcSells/blob/main/images/3.jpeg?raw=true)
 
-# 4) Add the items we want to sell, along with picture
+# 4) View the Complete description of product
+![alt text](https://github.com/Tanuj2552/nitcSells/blob/main/images/4.jpeg?raw=true)
 
-# 5) Deleting the item after it has been sold. 
+# 5) Add the items we want to sell, along with picture
+![alt text](https://github.com/Tanuj2552/nitcSells/blob/main/images/5.jpeg?raw=true)
+
